@@ -1,14 +1,14 @@
-import ICar from '../Interfaces/ICar.interface';
+import ICar from '../Interfaces/ICar';
 
 class Car {
-  id: string | undefined;
-  model: string;
-  year: number;
-  color: string;
-  status?: boolean | undefined;
-  buyValue: number;
-  doorsQty: number;
-  seatsQty: number;
+  protected id: string | undefined;
+  protected model: string;
+  protected year: number;
+  protected color: string;
+  protected status?: boolean | undefined;
+  protected buyValue: number;
+  private doorsQty: number;
+  private seatsQty: number;
 
   constructor({
     id,
