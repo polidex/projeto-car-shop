@@ -17,6 +17,18 @@ class CarService {
       seatsQty: car.seatsQty,
     });
   }
+
+  async readCars() {
+    const carODM = new CarODM();
+    const cars = await carODM.read();
+    return cars.map((car) => this.createCar(car));
+  }
+
+  async readCarById(id: string) {
+    const carODM = new CarODM();
+    const car = await carODM.readById(id);
+    if (car) this.createCar(car);
+  }
 }
 
 export default CarService;

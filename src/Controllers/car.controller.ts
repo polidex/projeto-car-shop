@@ -29,6 +29,25 @@ class CarController {
     const result = await this.carService.createCar(newCar);
     return this.res.status(201).json(result);
   };
+
+  readCars = async () => {
+    const result = await this.carService.readCars();
+    return this.res.status(200).json(result);
+  };
+
+  readCarById = async () => {
+    const { id } = this.req.params;
+    const result = await this.carService.readCarById(id);
+
+    if (!id) {
+      return this.res.status(422).json({ message: 'Invalid mongo id' });
+    }
+
+    if (typeof result === 'string') {
+      return this.res.status(404).json({ message: 'Car not found' });
+    }
+    return this.res.status(200).json(result);
+  };
 }
 
 export default CarController;
