@@ -15,7 +15,23 @@ class MotorcycleODM {
       category: { type: String, required: true },
       engineCapacity: { type: Number, required: true },
     });
-    this.model = models.Motorcycle || model('Car', this.schema);
+    this.model = models.Motorcycle || model('Motorcycle', this.schema);
+  }
+
+  async create(moto: IMotorcycle): Promise<IMotorcycle> {
+    return this.model.create({ ...moto });
+  }
+
+  async read(): Promise<IMotorcycle[]> {
+    return this.model.find({});
+  }
+
+  async readById(id: string): Promise<IMotorcycle | null> {
+    return this.model.findById(id);
+  }
+
+  async updateById(moto: IMotorcycle, id: string) {
+    return this.model.findByIdAndUpdate(id, moto, { new: true });
   }
 }
 
