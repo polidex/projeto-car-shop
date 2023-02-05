@@ -23,11 +23,15 @@ class CarODM {
   }
 
   async read(): Promise<ICar[]> {
-    return this.model.find();
+    return this.model.find({});
   }
 
   async readById(id: string): Promise<ICar | null> {
     return this.model.findById(id);
+  }
+
+  async updateById(car: ICar, id: string) {
+    return this.model.findByIdAndUpdate(id, car, { new: true });
   }
 }
 
