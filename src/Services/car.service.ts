@@ -48,7 +48,18 @@ class CarService {
   async updateCarById(car: ICar, id: string) {
     const carODM = new CarODM();
     const carById = await carODM.updateById(car, id);
-    if (carById) this.createCar(carById);
+    if (carById) {
+      return new Car({ 
+        id: carById.id,
+        model: carById.model,
+        year: carById.year,
+        color: carById.color,
+        status: carById.status,
+        buyValue: carById.buyValue,
+        doorsQty: carById.doorsQty,
+        seatsQty: carById.seatsQty,
+      });
+    }
   }
 }
 
