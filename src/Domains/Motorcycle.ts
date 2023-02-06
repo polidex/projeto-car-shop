@@ -1,14 +1,9 @@
 import IMotorcycle from '../Interfaces/IMotorcycle';
+import Vehicle from './Vehicle';
 
-class Motorcycle {
-  id: string | undefined;
-  model: string;
-  year: number;
-  color: string;
-  status?: boolean | undefined;
-  buyValue: number;
-  category: string;
-  engineCapacity: number;
+class Motorcycle extends Vehicle {
+  private category: string;
+  private engineCapacity: number;
 
   constructor({
     id,
@@ -20,12 +15,7 @@ class Motorcycle {
     category,
     engineCapacity,
   }: IMotorcycle) {
-    this.id = id;
-    this.model = model;
-    this.year = year;
-    this.color = color;
-    this.status = status;
-    this.buyValue = buyValue;
+    super({ id, model, year, color, status, buyValue });
     this.category = category;
     this.engineCapacity = engineCapacity;
   }
