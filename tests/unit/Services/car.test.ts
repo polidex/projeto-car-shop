@@ -1,10 +1,13 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
+import { afterEach } from 'mocha';
 import CarService from '../../../src/Services/car.service';
 import { carIn, carOut, carUpdate, carUpdated } from '../../mocks/car.mock';
 
 describe('testes da camanda CarService', function () {
+  afterEach(() => sinon.restore());
+
   it('testa se é possível cadastrar um novo carro', async function () {
     sinon.stub(Model, 'create').resolves(carOut);
 
@@ -24,12 +27,12 @@ describe('testes da camanda CarService', function () {
   });
 
   it('testa se é possível filtrar um carro atravez do id', async function () {
-    sinon.stub(Model, 'findById').resolves('63e12c6946c48eceb8647107');
+    sinon.stub(Model, 'findById').resolves(carOut);
 
     const carService = new CarService();
     const result = await carService.readCarById('63e12c6946c48eceb8647107');
 
-    expect(result).to.be.deep.equal([carOut]);
+    expect(result).to.be.deep.equal(carOut);
   });
 
   it('testa se é possível fazer update em um carro', async function () {
@@ -38,6 +41,6 @@ describe('testes da camanda CarService', function () {
     const carService = new CarService();
     const result = await carService.updateCarById(carUpdate, '63e12c6946c48eceb8647107');
 
-    expect(result).to.be.deep.equal(carOut);
+    expect(result).to.be.deep.equal(carUpdated);
   });
 });
